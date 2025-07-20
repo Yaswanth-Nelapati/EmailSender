@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Email Sender</title>
+</head>
+<body>
+  <h2>Send Email</h2>
+  <input type="email" id="email" placeholder="Enter recipient email" />
+  <button onclick="sendEmail()">Send</button>
+
+  <script>
+    function sendEmail() {
+      const email = document.getElementById("email").value;
+
+      fetch("http://localhost:8080/send-mail", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ email })
+      })
+      .then(res => res.text())
+      .then(data => alert(data))
+      .catch(err => alert("Error: " + err));
+    }
+  </script>
+</body>
+</html>
